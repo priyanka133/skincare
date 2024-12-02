@@ -19,11 +19,11 @@ const NavbarWithSidebar = () => {
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  // const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
-  const toggleMobileNav = () => setIsMobileNavOpen((prev) => !prev);
+  // const toggleMobileNav = () => setIsMobileNavOpen((prev) => !prev);
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
   return (

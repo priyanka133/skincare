@@ -1,6 +1,6 @@
 "use client"
 import Image from "next/image";
-import { FaHeart, FaShoppingBag } from "react-icons/fa";
+import {  FaShoppingBag } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai"; // Import Cross Icon
 import { useState } from "react";
 import img14 from "@/Assests/productd2.jpg";
@@ -57,7 +57,6 @@ const Wishlist = () => {
                 key={item.id}
                 className="relative flex flex-col border rounded-lg shadow-sm p-4 bg-white hover:shadow-lg transition h-full"
               >
-                {/* Cross Button */}
                 <button
                   className="absolute top-2 right-2 text-red-500 hover:text-red-700"
                   onClick={() => removeItem(item.id)}

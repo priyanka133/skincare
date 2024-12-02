@@ -5,94 +5,103 @@ import { FaArrowLeft, FaDownload } from "react-icons/fa";
 import { MdOutlineHelp } from "react-icons/md";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
-import img4 from "@/Assests/product4.jpg";
-import img5 from "@/Assests/product5.jpg";
+// import img4 from "@/Assests/product4.jpg";
+import img55 from "@/Assests/product5.jpg";
 import NavbarWithSidebar from "../components/custom/navbar";
 
-const orders = [
+
+interface Order {
+  id?: string;
+  orderNumber: string;
+  itemCount: number;
+  deliveredOn: string;
+  status: string;
+  imageUrl: string;
+  productName?: string;
+  quantity?: number;
+  price?: number;
+  details: {
+    orderId: string;
+    placedDate: string;
+    shippingAddress: {
+      name: string;
+      address: string;
+      phone: string;
+    };
+    shipment: {
+      amountPaid: number;
+      packageDeliveredOn: string;
+      items: number; // Add this field
+
+
+    };
+    paymentDetails: {
+      amountPaid: number;
+      paymentMethod: string;
+    };
+  };
+}
+
+
+
+
+
+const orders: Order[] = [
   {
-    orderNumber: "NYK-12345",
-    itemCount: 3,
-    deliveredOn: "25th November 2024",
-    status: "Delivered",
-    imageUrl: img4,
-    details: {
-      orderId: "NYK-12345",
-      placedDate: "20th November 2024",
-      shippingAddress: {
-        name: "Priyanka Pardeshi",
-        address: "Gangawadi Ravivar Karanja 686, Nashik-1, near Kakad Sadan.",
-        phone: "8317274111",
-      },
-      shipment: {
-        items: 3,
-        status: "Delivered",
-        courierPartner: "Blue Dart",
-        awb: "#65329264416",
-        packageDeliveredOn: "25th November 2024",
-        amountPaid: "₹2090",
-      },
-      paymentDetails: {
-        method: "COD",
-        subtotal: "₹2190",
-        discount: "-₹100",
-        shippingCharges: "₹0",
-        total: "₹2090",
-        savings: "₹500.00",
-        rewardsPointsRedeemed: true,
-      },
-    },
-  },
-  {
-    orderNumber: "NYK-67890",
+    id: '1',
+    orderNumber: '12345',
     itemCount: 2,
-    deliveredOn: "23rd November 2024",
-    status: "Delivered",
-    imageUrl: img5,
+    deliveredOn: '2024-12-01',
+    status: 'Delivered',
+    imageUrl: 'https://example.com/image.jpg',
+    productName: 'Product Name',
+    quantity: 1,
+    price: 50,
     details: {
-      orderId: "NYK-67890",
-      placedDate: "18th November 2024",
+      orderId: '12345',
+      placedDate: '2024-11-25',
       shippingAddress: {
-        name: "Rahul Sharma",
-        address: "Andheri West, Mumbai, Maharashtra, 400053",
-        phone: "9001234567",
+        name: 'John Doe',
+        address: '123 Main St',
+        phone: '123-456-7890',
       },
       shipment: {
-        items: 2,
-        status: "Delivered",
-        courierPartner: "DTDC",
-        awb: "#56783901123",
-        packageDeliveredOn: "23rd November 2024",
-        amountPaid: "₹1500",
+        amountPaid: 100,
+        packageDeliveredOn: "2024-12-01",
+        items: 1
       },
       paymentDetails: {
-        method: "Prepaid",
-        subtotal: "₹1600",
-        discount: "-₹100",
-        shippingCharges: "₹0",
-        total: "₹1500",
-        savings: "₹300.00",
-        rewardsPointsRedeemed: false,
+        amountPaid: 50,
+        paymentMethod: 'Credit Card',
       },
     },
   },
+  // More orders here...
 ];
 
-const OrderHistory = () => {
-  const [selectedOrder, setSelectedOrder] = useState(null);
-  const [ratings, setRatings] = useState({}); // Store product ratings
 
-  const handleViewDetails = (order) => {
-    setSelectedOrder(order);
+
+
+const OrderHistory = () => {
+  type Ratings = Record<number, number>;
+
+  const [ratings, setRatings] = useState<Ratings>({});
+  
+  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
+
+
+  const handleViewDetails = (order: Order) => {
+        setSelectedOrder(order);
   };
+  
 
   const handleBackToOrders = () => {
     setSelectedOrder(null);
   };
 
-  const handleRatingChange = (productIndex, rating) => {
-    setRatings({ ...ratings, [productIndex]: rating });
-  };
+const handleRatingChange = (productIndex: number, rating: number) => {
+  setRatings({ ...ratings, [productIndex]: rating });
+};
 
   if (selectedOrder) {
     return (
@@ -212,7 +221,7 @@ const OrderHistory = () => {
           <div key={index} className="flex items-start space-x-4 border-b pb-4">
             <div className="w-16 h-16 bg-gray-200 rounded overflow-hidden">
               <Image
-                src={img5} // Local image path in the public folder
+                src={img55} // Local image path in the public folder
                 alt="Product"
                 className="w-full h-full object-cover"
                 width={64} // You can specify the width and height of the image
@@ -277,44 +286,42 @@ const OrderHistory = () => {
      
 
       <div className="bg-[#fff6f1]fggokiuj shadow rounded-lg max-w-4xl mx-auto">
-        {orders.map((order, index) => (
-          <div
-            key={index}
-            className="flex flex-col sm:flex-row items-start sm:items-center border-b border-gray-200 p-4 sm:p-6 last:border-b-0"
-          >
-            <div className="flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28 relative overflow-hidden rounded-lg">
-              <Image
-                src={order.imageUrl}
-                alt={`Order ${order.orderNumber}`}
-                layout="fill"
-                objectFit="cover"
-                priority
-              />
-            </div>
-            <div className="flex-grow sm:ml-6 mt-4 sm:mt-0 space-y-2">
-              <p className="text-[#5A3726] font-medium">
-                <span className="font-semibold">Order Number:</span>{" "}
-                {order.orderNumber}
-              </p>
-              <p className="text-[#5A3726] font-medium">
-                <span className="font-semibold">Item Count:</span>{" "}
-                {order.itemCount}
-              </p>
-              <p className="text-[#5A3726] font-medium">
-                <span className="font-semibold">Delivered On:</span>{" "}
-                {order.deliveredOn}
-              </p>
-            </div>
-            <div className="mt-4 sm:mt-0">
-              <button
-                onClick={() => handleViewDetails(order)}
-                className="px-4 py-2 text-sm text-white bg-[#703527] rounded-lg hover:bg-[#703527]"
-              >
-                View Details
-              </button>
-            </div>
-          </div>
-        ))}
+      {orders.map((order, index) => (
+    <div
+      key={index}
+      className="flex flex-col sm:flex-row items-start sm:items-center border-b border-gray-200 p-4 sm:p-6 last:border-b-0"
+    >
+      <div className="flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28 relative overflow-hidden rounded-lg">
+        <Image
+          src={order.imageUrl}
+          alt={`Order ${order.orderNumber}`}
+          layout="fill"
+          objectFit="cover"
+          priority
+        />
+      </div>
+      <div className="flex-grow sm:ml-6 mt-4 sm:mt-0 space-y-2">
+        <p className="text-[#5A3726] font-medium">
+          <span className="font-semibold">Order Number:</span> {order.orderNumber}
+        </p>
+        <p className="text-[#5A3726] font-medium">
+          <span className="font-semibold">Item Count:</span> {order.itemCount}
+        </p>
+        <p className="text-[#5A3726] font-medium">
+          <span className="font-semibold">Delivered On:</span> {order.deliveredOn}
+        </p>
+      </div>
+      <div className="mt-4 sm:mt-0">
+        <button
+          onClick={() => handleViewDetails(order)}
+          className="px-4 py-2 text-sm text-white bg-[#703527] rounded-lg hover:bg-[#703527]"
+        >
+          View Details
+        </button>
+      </div>
+    </div>
+  ))}
+
       </div>
     </div>
     </>

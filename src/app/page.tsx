@@ -18,7 +18,6 @@ import {
   FaHeart,
 } from "react-icons/fa";
 import img from "@/Assests/productarticle.jpg";
-import img1 from "@/Assests/product1.jpg";
 import img2 from "@/Assests/service.jpg";
 import img3 from "@/Assests/banner2.jpg";
 
@@ -33,15 +32,11 @@ import img11 from "@/Assests/bannerskin1.jpg";
 import img12 from "@/Assests/productarticle.jpg";
 import img13 from "@/Assests/product.jpg";
 
-import img14 from "@/Assests/consical4.jpg";
 import img15 from "@/Assests/consical1.jpg";
 import img16 from "@/Assests/consical2.jpg";
 import img17 from "@/Assests/consical3.jpg";
 
-// @ts-ignore
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+
 
 import { AiFillStar } from "react-icons/ai";
 import Testimonials from "./components/custom/testinomal";
@@ -107,25 +102,25 @@ const imageData = [
   { id: 6, src: img4, likes: "6k", comments: "7" },
 ];
 
-const settings = {
-  dots: false,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 2,
-  slidesToScroll: 1,
-  arrows: true,
-  // nextArrow: <CustomNextArrow />,
-  // prevArrow: <CustomPrevArrow />,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
-};
+// const settings = {
+//   dots: false,
+//   infinite: true,
+//   speed: 500,
+//   slidesToShow: 2,
+//   slidesToScroll: 1,
+//   arrows: true,
+//   // nextArrow: <CustomNextArrow />,
+//   // prevArrow: <CustomPrevArrow />,
+//   responsive: [
+//     {
+//       breakpoint: 1024,
+//       settings: {
+//         slidesToShow: 1,
+//         slidesToScroll: 1,
+//       },
+//     },
+//   ],
+// };
 const categories = [
   {
     id: 1,

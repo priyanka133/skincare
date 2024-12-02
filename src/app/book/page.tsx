@@ -13,7 +13,7 @@ export default function OpeningHours() {
           </h3>
           <h2 className="text-3xl font-bold text-[#5A3726]">Opening Hours</h2>
           <p className="text-sm text-[#5A3726]/80">
-            Find out what time we're currently available. Convenience and
+            Find out what time we&apos;re currently available. Convenience and
             leisure on your terms are ensured by hours customized to fit your
             schedule for luxurious spa treatments and cosmetic care.
           </p>

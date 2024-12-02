@@ -1,8 +1,13 @@
 
 import React from "react";
-import { FaArrowLeft, FaRegHeart } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 
-const CartSidebar = ({ isSidebarOpen, toggleSidebar }) => {
+
+interface CartSidebarProps {
+  isSidebarOpen: boolean; // Type for the sidebar open state
+  toggleSidebar: () => void; // Type for the function to toggle the sidebar
+}
+const CartSidebar: React.FC<CartSidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
   return (
     <div className="relative">
       {/* Sidebar */}
