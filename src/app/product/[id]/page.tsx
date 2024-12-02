@@ -39,12 +39,15 @@ export default function ProductDetails() {
     review: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setNewReview((prev) => ({ ...prev, [name]: value }));
   };
+  
 
-  const handleSubmit = (e) => {
+
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newReview.name && newReview.review) {
       setCustomerReviews((prev) => [
@@ -395,7 +398,7 @@ export default function ProductDetails() {
                           value={newReview.review}
                           onChange={handleInputChange}
                           className="border rounded p-3 w-full mt-4"
-                          rows="4"
+                          rows={4}
                           required
                         ></textarea>
                         <div className="flex justify-between items-center mt-4">

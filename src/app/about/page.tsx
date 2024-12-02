@@ -3,10 +3,8 @@ import Image from "next/image";
 import img from "@/Assests/banner.jpg";
 import img1 from "@/Assests/images2.jpg";
 import img2 from "@/Assests/about3.jpg";
-import img3 from "@/Assests/banner2.jpg";
 import { useState } from "react";
 import Navbar from "../components/custom/navbar";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 import { FiCircle } from "react-icons/fi";
 
 export default function AboutSection() {
@@ -29,7 +27,6 @@ export default function AboutSection() {
     </div>
   </header>
 
-  {/* Content Section */}
   <div className="container mx-auto flex flex-col md:flex-row items-center gap-8 py-20 px-4 sm:px-6 lg:px-8">
     {/* Image */}
     <div className="relative w-full md:w-1/2 h-64 sm:h-80 md:h-96 flex-shrink-0">

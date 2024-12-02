@@ -5,7 +5,18 @@ import { FaEdit } from "react-icons/fa";
 import { useState } from "react";
 import img14 from "@/Assests/profile.jpg";
 import NavbarWithSidebar from "../components/custom/navbar";
+type ProfileDetails = {
+  email: string;
+  mobile: string;
+  dob: string;
+};
 
+type AddressDetails = {
+  name: string;
+  addressLine1: string;
+  addressLine2: string;
+  phone: string;
+};
 const ProfileCard = () => {
   const [profileDetails, setProfileDetails] = useState({
     email: "piyapardeshi111@gmail.com",
@@ -22,29 +33,57 @@ const ProfileCard = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editType, setEditType] = useState<"profile" | "address">("profile");
-  const [formValues, setFormValues] = useState({ ...profileDetails });
+  // const [formValues, setFormValues] = useState({ ...profileDetails });
+  type FormValues = ProfileDetails | AddressDetails;
 
+  const [formValues, setFormValues] = useState<FormValues>({
+    email: '', mobile: '', dob: '', // initial state for profile
+  });
+  
   const openModal = (type: "profile" | "address") => {
     setEditType(type);
-    setFormValues(type === "profile" ? { ...profileDetails } : { ...addressDetails });
+  
+    if (type === "profile") {
+      setFormValues({ ...profileDetails });
+    } else {
+      setFormValues({ ...addressDetails });
+    }
+  
     setIsModalOpen(true);
   };
+  
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
+  
+    if (editType === "profile") {
+      setFormValues((prev) => ({ ...prev, [name]: value }));
+    } else if (editType === "address") {
+      setFormValues((prev) => ({ ...prev, [name]: value }));
+    }
   };
+  
 
   const handleSave = () => {
     if (editType === "profile") {
-      setProfileDetails({ ...formValues });
+      setProfileDetails({
+        email: (formValues as ProfileDetails).email,
+        mobile: (formValues as ProfileDetails).mobile,
+        dob: (formValues as ProfileDetails).dob,
+      });
     } else {
-      setAddressDetails({ ...formValues });
+      setAddressDetails({
+        name: (formValues as AddressDetails).name,
+        addressLine1: (formValues as AddressDetails).addressLine1,
+        addressLine2: (formValues as AddressDetails).addressLine2,
+        phone: (formValues as AddressDetails).phone,
+      });
     }
     setIsModalOpen(false);
   };
+  
 
   return (
     <>
@@ -137,41 +176,44 @@ const ProfileCard = () => {
             {editType === "profile" ? (
               <>
                 <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formValues.email}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Mobile
-                  </label>
-                  <input
-                    type="text"
-                    name="mobile"
-                    value={formValues.mobile}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Date of Birth
-                  </label>
-                  <input
-                    type="text"
-                    name="dob"
-                    value={formValues.dob}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200"
-                  />
-                </div>
+      <label className="block text-sm font-medium text-gray-700">
+        Email
+      </label>
+      <input
+        type="email"
+        name="email"
+        value={(formValues as ProfileDetails).email}
+
+        onChange={handleInputChange}
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200"
+      />
+    </div>
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-gray-700">
+        Mobile
+      </label>
+      <input
+        type="text"
+        name="mobile"
+        value={(formValues as ProfileDetails).mobile}
+
+        onChange={handleInputChange}
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200"
+      />
+    </div>
+    <div className="mb-4">
+      <label className="block text-sm font-medium text-gray-700">
+        Date of Birth
+      </label>
+      <input
+        type="date"  // Use "date" input type for better date handling
+        name="dob"
+        value={(formValues as ProfileDetails).dob}
+
+        onChange={handleInputChange}
+        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200"
+      />
+    </div>
               </>
             ) : (
               <>
@@ -182,7 +224,8 @@ const ProfileCard = () => {
                   <input
                     type="text"
                     name="name"
-                    value={formValues.name}
+                    value={(formValues as AddressDetails).name}
+
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200"
                   />
@@ -193,7 +236,8 @@ const ProfileCard = () => {
                   </label>
                   <textarea
                     name="addressLine1"
-                    value={formValues.addressLine1}
+                    value={(formValues as AddressDetails).addressLine1}
+
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200"
                   />
@@ -204,7 +248,8 @@ const ProfileCard = () => {
                   </label>
                   <textarea
                     name="addressLine2"
-                    value={formValues.addressLine2}
+                    value={(formValues as AddressDetails).addressLine2}
+
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200"
                   />
@@ -216,7 +261,8 @@ const ProfileCard = () => {
                   <input
                     type="text"
                     name="phone"
-                    value={formValues.phone}
+                    value={(formValues as AddressDetails).phone}
+
                     onChange={handleInputChange}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-pink-200"
                   />
